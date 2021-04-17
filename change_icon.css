@@ -1,0 +1,41 @@
+div.icon_menu{
+    width: 66vw;
+    height: 66vh;
+    position: fixed;
+    top: 16.5%;
+    bottom: 16.5%;
+    left: 16.5%;
+    right: 16.5%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+div.icon_menu div{
+    background-color: rgba(240, 240, 240, 0.9);
+    border-radius: 10px;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    box-shadow: 8px 8px 16px rgba(0,0,0,0.5);
+}
+
+div.icon_menu div form#search_icon{
+    position: absolute;
+    top: 8%;
+    right: 6%;
+}
+
+div.icon_menu div form#search_icon input#sub_button{
+    color: black;
+    background-color: rgba(0,0,0,0);
+    border: 0px solid;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+
+div.icon_menu div h1{
+    font-family: sans-serif;
+    position: absolute;
+    left: 2%;
+}
