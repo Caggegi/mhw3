@@ -33,6 +33,7 @@ header div#background{
 
 header div#info{
     position: relative;
+    cursor: pointer;
 }
 
 header div#search{
@@ -392,4 +393,107 @@ footer div p{
     div.show-case{
         align-items: center;
     }
+}
+
+
+/*Menu per la scelta della foto profilo*/
+
+div.icon_menu{
+    color: black;
+    z-index: 10;
+    position: fixed;
+    height: 66vh;
+    width: 66vw;
+    min-height: 400px;
+    background-color: rgb(245, 245, 245);
+    border-radius: 8px;
+    left: 16.5vw;
+    top: 16.5vh;
+    box-shadow: 8px 8px 12px rgba(0,0,0,0.5);
+    font-family: 'Roboto', sans-serif;
+}
+
+div.icon_menu div.m_header{
+    background-color: rgb(200, 200, 200);
+    height: 15%;
+    border-radius: 8px 8px 0px 0px;
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.close_button{
+    height: 16px;
+    width: 16px;
+    background-color: rgb(207, 29, 29);
+    border-radius: 100%;
+    margin: 16px;
+}
+
+div.icon_menu div.m_header div.form_container{
+    display:flex;
+    align-items: center;
+    justify-content: right;
+}
+
+div.icon_menu div.m_header div.form_container input#category{
+    border: 1px solid grey;
+    border-radius: 4px;
+}
+
+div.icon_menu div.m_header div.form_container input#send{
+    background-color: dodgerblue;
+    color: white;
+    border-radius: 4px;
+    border: 0px;
+    margin-right: 16px;
+}
+
+div.icon_menu div.m_header div.form_container input#send:hover{
+    background-color: rgb(92, 121, 150);
+}
+
+div.icon_menu div.m_body{
+    padding: 16px;
+}
+
+div.icon_menu div.m_body div.current{
+    display: flex;
+}
+
+div.icon_menu div.m_body div.current img{
+    margin-right: 16px;
+    border-radius: 8%;
+    border: 2px solid white;
+    height: 10%;
+    width: 10%;
+}
+
+div.icon_menu div.m_body div.pick{
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+div.icon_menu div.m_body div.pick img{
+    border-radius: 8%;
+    border: 2px solid white;
+    height: 7%;
+    width: 7%;
+}
+
+.no-scroll{
+    overflow: hidden;
+}
+
+div.menu_priority{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: 9;
+    background-color: rgba(0,0,0,0.2);
 }

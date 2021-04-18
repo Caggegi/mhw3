@@ -282,3 +282,25 @@ function create_card(sezione, elemento, preferiti){
         button.addEventListener("click", mostraDescrizione);
     }
 }
+
+document.querySelector("header div#info").addEventListener("click", changePic);
+document.querySelector("div.icon_menu div.m_header div.close_button").addEventListener("click", closeIconMenu);
+
+function changePic(event){
+    document.querySelector("div.menu_priority").classList.remove("hide");
+    const menu = document.querySelector("div.icon_menu");
+    menu.querySelector("h3").textContent = event.currentTarget.querySelector("h3").textContent;
+    menu.querySelector("h5").textContent = event.currentTarget.querySelector("p").textContent;
+    menu.querySelector("img#current_picture").src = event.currentTarget.querySelector("img").src;
+    menu.classList.remove("hide");
+    document.querySelector("body").classList.add("no-scroll");
+}
+
+function closeIconMenu(){
+    document.querySelector("div.menu_priority").classList.add("hide");
+    document.querySelector("div.icon_menu").classList.add("hide");
+    document.querySelector("header div#info h3").textContent = document.querySelector("div.icon_menu div.m_body div.current div h3").textContent;
+    document.querySelector("header div#info p").textContent = document.querySelector("div.icon_menu div.m_body div.current div h5").textContent;
+    document.querySelector("header div#info img").src = document.querySelector("div.icon_menu div.m_body div.current img#current_picture").src;
+    document.querySelector("body").classList.remove("no-scroll");
+}
