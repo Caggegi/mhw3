@@ -460,6 +460,34 @@ div.icon_menu div.m_body{
 
 div.icon_menu div.m_body div.current{
     display: flex;
+    width: 100%;
+}
+
+div.icon_menu div.m_body div.current div{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+div.icon_menu div.m_body div.current div input{
+    border: 0px;
+    width: 100%;
+    background-color: rgb(245, 245, 245);
+    text-align: left;
+}
+
+div.icon_menu div.m_body div.current div input#current_name{
+    font-size: 1.5em;
+}
+
+div.icon_menu div.m_body div.current div input#current_description{
+    font-size: 1em;
+}
+
+div.icon_menu div.m_body div.current input:focus{
+    outline: none;
 }
 
 div.icon_menu div.m_body div.current img{
