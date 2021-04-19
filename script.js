@@ -284,7 +284,8 @@ function create_card(sezione, elemento, preferiti){
 }
 
 document.querySelector("header div#info").addEventListener("click", changePic);
-document.querySelector("div.icon_menu div.m_header div.close_button").addEventListener("click", closeIconMenu);
+document.querySelector("div.icon_menu div.m_header div.window_buttons div.save_button").addEventListener("click", saveIconMenu);
+document.querySelector("div.icon_menu div.m_header div.window_buttons div.close_button").addEventListener("click", closeIconMenu);
 
 function changePic(event){
     document.querySelector("div.menu_priority").classList.remove("hide");
@@ -294,9 +295,10 @@ function changePic(event){
     menu.querySelector("img#current_picture").src = event.currentTarget.querySelector("img").src;
     menu.classList.remove("hide");
     document.querySelector("body").classList.add("no-scroll");
+    showUnsplashed("");
 }
 
-function closeIconMenu(){
+function saveIconMenu(){
     document.querySelector("div.menu_priority").classList.add("hide");
     document.querySelector("div.icon_menu").classList.add("hide");
     document.querySelector("header div#info h3").textContent = document.querySelector("input#current_name").value;
@@ -304,4 +306,79 @@ function closeIconMenu(){
     document.querySelector("header div#info img").src = document.querySelector("div.icon_menu div.m_body div.current img#current_picture").src;
     document.querySelector("header div#search div img.mobile").src = document.querySelector("div.icon_menu div.m_body div.current img#current_picture").src;
     document.querySelector("body").classList.remove("no-scroll");
+}
+function closeIconMenu(){
+    document.querySelector("div.menu_priority").classList.add("hide");
+    document.querySelector("div.icon_menu").classList.add("hide");
+}
+
+//Dipendenze API siti terzi
+
+const header = document.querySelector("header div#background");
+
+fetch("https://picsum.photos/2800/700").then(onResponse, onError);
+
+function onResponse(response){
+    header.style.backgroundImage = "url("+response.url+")";
+}
+
+function onError(error){
+    console.log(error);
+    header.style.backgroundImage = "url(img/default.jpg)";
+}
+
+function onError2(error){
+    console.log(error);
+}
+
+const unsplash_key = "TiyMZxRbh4vc2ZZCNtHMe7FSYjMU2uGn2iryP_wb2n4";
+const unsplash_secret = "m2pS57X3A-x2K2oufCvW7ZMM2-7iTTemYLGka0bGU6s";
+const unsplash = "https://api.unsplash.com/photos"
+
+const changeProfilePicture = document.querySelector("form#choose_category");
+changeProfilePicture.addEventListener("submit", reloadPicCategories);
+
+function reloadPicCategories(event){
+    event.preventDefault();
+    const category = document.querySelector("form#choose_category input#category");
+    console.log("la categoria scelta è: "+ category.value);
+    showUnsplashed(category.value);
+}
+
+function showUnsplashed(category){
+    if(category === ""){
+        console.log("foto random");
+        document.querySelector("div.icon_menu div.m_body div.pick").innerHTML = "";
+        /*const endpoint = unsplash+"/random/";
+        fetch(endpoint, {
+            header: {
+                'Authorization':unsplash_key
+            }
+        }).then(onResponseUnsplashed).then(unsplashJson);*/
+        for(let i=0; i<5; i++)
+            fetch("https://picsum.photos/700/700").then(unsplashJson, onError2);
+    } else{
+        console.log(category);
+        
+    }
+}
+
+function onResponseUnsplashed(response){
+    console.log(response);
+    return response.json();
+}
+
+function unsplashJson(json){
+    //console.log(json);
+    //const source = json.urls.regular;
+    const section = document.querySelector("div.icon_menu div.m_body div.pick");
+    const image = document.createElement("img");
+    image.src = json.url;
+    image.classList.add("picture_candidate");
+    image.addEventListener("click",changeCurrentPic);
+    section.appendChild(image);
+}
+
+function changeCurrentPic(event){
+    document.querySelector("div.icon_menu div.m_body div.current img#current_picture").src = event.currentTarget.src;
 }
