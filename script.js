@@ -310,6 +310,7 @@ function saveIconMenu(){
 function closeIconMenu(){
     document.querySelector("div.menu_priority").classList.add("hide");
     document.querySelector("div.icon_menu").classList.add("hide");
+    document.querySelector("body").classList.remove("no-scroll");
 }
 
 //Dipendenze API siti terzi
