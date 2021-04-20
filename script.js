@@ -349,9 +349,17 @@ function showUnsplashed(category){
     document.querySelector("div.icon_menu div.m_body div.pick").innerHTML = "";
     if(category === ""){
         console.log("foto random");
+        fetch(unsplash+"/search/photos/?page="+Math.floor(Math.random()*10)+1+"&query=pattern"
+                                      +"&orientation=squarish&content_filter=high&per_page=5",{
+            method:"get",
+            headers:{
+                "Authorization":"Client-ID "+unsplash_key,
+            }
+        })
+        .then(onResponseUnsplashed, onError2).then(unsplashJson);
     } else{
         console.log(category);
-        fetch(unsplash+"/search/photos/?page=1&query="+category,{
+        fetch(unsplash+"/search/photos/?page=1&query="+category+"&orientation=squarish&content_filter=high&per_page=5",{
             method:"get",
             headers:{
                 "Authorization":"Client-ID "+unsplash_key,
@@ -369,11 +377,15 @@ function onResponseUnsplashed(response){
 function unsplashJson(json){
     console.log(json);
     const risultati = json.results;
-    let num = 5;
-    if(risultati.length<5)
-        num=risultati.length;
-    for(let i=0; i<num; i++){
-        append_candidate(risultati[i].urls.thumb);
+    if(risultati.length===0){
+        const no_items = document.createElement("p");
+        const category = document.querySelector("form#choose_category input#category");
+        no_items.textContent = "Nessun risultato ottenuto per "+category.value;
+        document.querySelector("div.icon_menu div.m_body div.pick").appendChild(no_items);
+    } else{
+        for(let i=0; i<risultati.length; i++){
+            append_candidate(risultati[i].urls.thumb);
+        }
     }
 }
 
