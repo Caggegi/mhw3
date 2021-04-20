@@ -84,6 +84,7 @@ header div#account{
 
 header div#account img{
     height: 10vh;
+    width: 10vh;
     margin-left: 8px;
     border-radius: 100%;
     border: 2px solid white;
@@ -520,8 +521,8 @@ div.icon_menu div.m_body div.current img{
     margin-right: 16px;
     border-radius: 8%;
     border: 2px solid white;
-    height: 10%;
-    width: 10%;
+    height: 150px;
+    width: 150px;
 }
 
 div.icon_menu div.m_body div.pick{
@@ -531,8 +532,8 @@ div.icon_menu div.m_body div.pick{
 }
 
 div.icon_menu div.m_body div.pick img.picture_candidate{
-    height: 18%;
-    width: 18%;
+    height: 80px;
+    width: 80px;
     border-radius: 8%;
     border: 2px solid white;
 }

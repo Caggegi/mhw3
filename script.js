@@ -332,8 +332,7 @@ function onError2(error){
 }
 
 const unsplash_key = "TiyMZxRbh4vc2ZZCNtHMe7FSYjMU2uGn2iryP_wb2n4";
-const unsplash_secret = "m2pS57X3A-x2K2oufCvW7ZMM2-7iTTemYLGka0bGU6s";
-const unsplash = "https://api.unsplash.com/photos"
+const unsplash = "https://api.unsplash.com/"
 
 const changeProfilePicture = document.querySelector("form#choose_category");
 changeProfilePicture.addEventListener("submit", reloadPicCategories);
@@ -346,20 +345,18 @@ function reloadPicCategories(event){
 }
 
 function showUnsplashed(category){
+    document.querySelector("div.icon_menu div.m_body div.pick").innerHTML = "";
     if(category === ""){
         console.log("foto random");
-        document.querySelector("div.icon_menu div.m_body div.pick").innerHTML = "";
-        /*const endpoint = unsplash+"/random/";
-        fetch(endpoint, {
-            header: {
-                'Authorization':unsplash_key
-            }
-        }).then(onResponseUnsplashed).then(unsplashJson);*/
-        for(let i=0; i<5; i++)
-            fetch("https://picsum.photos/700/700").then(unsplashJson, onError2);
     } else{
         console.log(category);
-        
+        fetch(unsplash+"/search/photos/?page=1&query="+category,{
+            method:"get",
+            headers:{
+                "Authorization":"Client-ID "+unsplash_key,
+            }
+        })
+        .then(onResponseUnsplashed, onError2).then(unsplashJson);
     }
 }
 
@@ -369,16 +366,25 @@ function onResponseUnsplashed(response){
 }
 
 function unsplashJson(json){
-    //console.log(json);
-    //const source = json.urls.regular;
-    const section = document.querySelector("div.icon_menu div.m_body div.pick");
-    const image = document.createElement("img");
-    image.src = json.url;
-    image.classList.add("picture_candidate");
-    image.addEventListener("click",changeCurrentPic);
-    section.appendChild(image);
+    console.log(json);
+    const risultati = json.results;
+    let num = 5;
+    if(risultati.length<5)
+        num=risultati.length;
+    for(let i=0; i<num; i++){
+        append_candidate(risultati[i].urls.thumb);
+    }
 }
 
 function changeCurrentPic(event){
     document.querySelector("div.icon_menu div.m_body div.current img#current_picture").src = event.currentTarget.src;
+}
+
+function append_candidate(src){
+    const section = document.querySelector("div.icon_menu div.m_body div.pick");
+    const image = document.createElement("img");
+    image.src = src;
+    image.classList.add("picture_candidate");
+    image.addEventListener("click",changeCurrentPic);
+    section.appendChild(image);
 }
