@@ -349,7 +349,7 @@ function showUnsplashed(category){
     document.querySelector("div.icon_menu div.m_body div.pick").innerHTML = "";
     if(category === ""){
         console.log("foto random");
-        fetch(unsplash+"/search/photos/?page="+Math.floor(Math.random()*10)+1+"&query=pattern"
+        fetch(unsplash+"/search/photos/?page="+Math.floor(Math.random()*9)+1+"&query=pattern"
                                       +"&orientation=squarish&content_filter=high&per_page=5",{
             method:"get",
             headers:{
